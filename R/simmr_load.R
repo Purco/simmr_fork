@@ -181,12 +181,17 @@ simmr_load <- function(mixtures,
     correction_sds <- matrix(0, ncol = n_tracers, nrow = n_sources)
   }
 
-  # concentration_means must be a matrix where all elements are less than 1
+  # concentration_means must be a matrix where all elements are less than 1 (delete this condition)
+  # if (is.null(concentration_means)) {
+  #   concentration_means <- matrix(1, ncol = n_tracers, nrow = n_sources)
+  # } else {
+  #   assert_true(all(concentration_means < 1) & all(concentration_means > 0))
+  # }
   if (is.null(concentration_means)) {
     concentration_means <- matrix(1, ncol = n_tracers, nrow = n_sources)
-  } else {
-    assert_true(all(concentration_means < 1) & all(concentration_means > 0))
-  }
+  } 
+  
+  
 
   # Check the groups are the right length and structure if given
   if (!is.null(group)) {
